@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In</title>
+    <script defer src="../public/main.js"></script>
+</head>
+<body>
+    <div>
+        <h1>Sign In</h1>
+        <div id="lol"></div>
+        <form id="formbox" method="post" action="/signin">
+            <div>
+                <label for="email">Email</label>
+                <input id="email" type="email" name="email" placeholder="email" required />
+            </div>
+            <br/>
+            <div>
+                <label for="password">Password</label>
+                <input id="password" type="password" name="password" placeholder="password" required />
+            </div>
+            <br/>
+            <button type="submit">Submit</button>
+            <div><a href="#">Forgot Password?</a></div>
+        </form>
+        <br/>
+        <div id="errorBox"></div>
+    </div>
+</body>
+</html>
