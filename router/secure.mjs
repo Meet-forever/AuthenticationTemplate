@@ -2,7 +2,7 @@ import {Router} from 'express'
 import Validator from './stateValidator.mjs';
 const router = Router()
 
-router.all('*', Validator)
+router.get('*', Validator)
 router.get('/profile', (req, res) => {
     res.render('profile')
 })

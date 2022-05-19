@@ -6,6 +6,8 @@ import authenticate from "./router/authentication.mjs"
 import securedUser from "./router/secure.mjs"
 import sessions from "express-session";
 import {randomBytes} from "node:crypto";
+import MongoStore from "connect-mongo";
+
 
 
 // Initialization
@@ -17,22 +19,31 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 
 
-// Setup - Paths and Middlewares
+// --- Paths and Middlewares setup
 app.engine('ejs', renderFile);
 app.use('/public', express.static(join(__dirname,'public')));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true}));
+app.set('view engine', 'ejs')   // Using EJS as a template engine
+app.set('views', join(__dirname, 'views')) // Setting views folder path 
+
+
+
+
+// -- Session Set Up
 app.use(sessions({
-    secret: randomBytes(36).toString(),
+    store: MongoStore.create({
+        mongoUrl: process.env.DB_URI,
+        collectionName: 'sessions'
+    }),
+    secret: randomBytes(36).toString('hex'),
     resave: false,
-    saveUninitialized: false,
+    saveUninitialized: true,
     cookie : { 
-        maxAge: 60 * 60 * 1 * 1000,
+        maxAge: 60 * 1 * 1000,
         httpOnly: true
     }
 }))
-app.set('view engine', 'ejs')   // Using EJS as a template engine
-app.set('views', join(__dirname, 'views')) // Setting views folder path 
 
 
 

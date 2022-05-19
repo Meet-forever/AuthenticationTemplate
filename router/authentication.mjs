@@ -4,9 +4,8 @@ import Validator from "./stateValidator.mjs"
 import dotenv from "dotenv";
 import { 
     getAuth, 
-    signInWithEmailAndPassword, 
     createUserWithEmailAndPassword, 
-    signOut } from "firebase/auth"
+    signInWithEmailAndPassword, } from "firebase/auth"
 dotenv.config()
 
 
@@ -24,11 +23,12 @@ const auth = getAuth(firebaseapp)
 
 
 
-router.all('*', Validator);
+router.get('*', Validator);
 router.get('/signin', (req, res) =>{
     res.render("signIn.ejs")
 }) 
 router.post('/signin', (req, res) =>{
+    req.session.uid = { userID: "123"}
     res.send(JSON.stringify({
         status: "OK",
         sucess: "true"
