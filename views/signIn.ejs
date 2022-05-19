@@ -24,7 +24,11 @@
             <div><a href="#">Forgot Password?</a></div>
         </form>
         <br/>
-        <div id="signinerrorBox"></div>
+        <div id="signinerrorBox">
+        </div>
+        <% if (typeof errorMessage !== 'undefined') { %>
+        <h2><%= errorMessage %></h2>
+        <% } %>
     </div>
 </body>
 </html>

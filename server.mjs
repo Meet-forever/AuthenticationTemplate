@@ -7,7 +7,7 @@ import securedUser from "./router/secure.mjs"
 import sessions from "express-session";
 import {randomBytes} from "node:crypto";
 import MongoStore from "connect-mongo";
-
+import connection from "./config/database.mjs"
 
 
 // Initialization
