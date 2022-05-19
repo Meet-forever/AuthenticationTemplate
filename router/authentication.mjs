@@ -2,11 +2,24 @@ import { Router } from "express"
 import dotenv from "dotenv";
 import model from "../model/User.mjs"
 import hashGenerator, { isValid } from "../util/generator.mjs"
+import { initializeApp } from "firebase/app"
+import { 
+    getAuth, 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword, } from "firebase/auth"
 dotenv.config()
 
 
 const router = Router()
-
+const firebaseapp = initializeApp({
+    apiKey: process.env.API_KEY,
+    authDomain: process.env.AUTH_DOMAIN,
+    projectId: process.env.PROJECT_ID,
+    storageBucket: process.env.STORAGE_BUCKET,
+    messagingSenderId: process.env.MESSAGING_SENDER_ID ,
+    appId: process.env.APP_ID,
+})
+const auth = getAuth(firebaseapp)
 
 
 const Validator = (req, res, next) =>{
